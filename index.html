@@ -28,7 +28,7 @@
                 <li><a href="shop.html">SHOP</a></li>
                 <li><a href="about.html">ABOUT</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
-                <li><a href="#"><i class="fa-solid fa-cart-shopping"></i><span id="item-number">0</span></a></li>
+                <li id="shopping-cart"><a href="#"><i class="fa-solid fa-cart-shopping"></i><span id="item-counts">0</span></a></li>
             </ul>
         </nav>
     </header>
@@ -75,6 +75,25 @@
 
         <!-- cart section -->
         <section id="cart">
+            <div id="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <ul id="added-items">
+                <!-- <h4>EMPTY!</h4>
+                <li class="added-item">
+                    <img src="" alt="item image">
+                    <div>
+                        <h4>Item Name</h4>
+                        <p>Item Price</p>
+                        <div>
+                            <button class="minus-btn" data-id="1">-</button>
+                            <button class="plus-btn" data-id="1">+</button>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+            <h6>TOTAL PRICE:</h6>
+            <p id="price-sum" style="color: green;"></p>
         </section>
 
         <!-- location section -->
@@ -117,5 +136,6 @@
     </footer>
 
     <script src="app.js"></script>
+    <!-- <script src="/JS/shoppingCart.js"></script> -->
 </body>
 </html>

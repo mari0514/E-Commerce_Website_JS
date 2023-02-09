@@ -288,6 +288,51 @@ main {
     }
 }
 
+// cat section 
+html {
+    // position: relative;
+    #cart {
+        display: none;
+        // position: sticky;
+        position: fixed;
+        top: 24vh;
+        right: calc(50% - 150px);
+        max-width: 300px;
+        padding: 32px;
+        background-color: #222;
+        color: #fff;
+        flex-direction: column;
+        align-items: center;
+        #close-btn {
+            margin-bottom: 16px;
+            &:hover {
+                cursor: pointer;
+                color: $primary-color;
+            }
+        }
+        .added-item {
+            // display: flex;
+            // flex-direction: column;
+            // align-items: center;
+            &-description {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            h4 {
+                color: #fff;
+            }
+        }
+        img {
+            width: 92px;
+            height: 92px;
+        }
+        .minus-btn, .plus-btn {
+            padding: 8px 16px;
+        }
+    }
+}
+
 // location section
 #location {
     text-align: center;
@@ -334,8 +379,6 @@ main {
 
 // footer
 footer {
-    // display: flex;
-    // flex-direction: column;
     height: 80px;
     padding: 68px 40px;
     margin-bottom: 32px;
@@ -349,6 +392,7 @@ footer {
         display: flex;
         flex-direction: row;
         a {
+            transition: 0.3s ease;
             margin: 48px auto 32px;
             color: $lighter-color;
             &+ a {
