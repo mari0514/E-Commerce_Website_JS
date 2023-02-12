@@ -38,7 +38,7 @@
                     <img class="item-img" src="${item.image}" alt="${item.name}">
                     <h6 class="item-name">${item.name}</h6>
                     <p class="item-price">$${item.price}</p>
-                    <button class="add-btn" onclick="addToCart(${item.id}, ${item.price})">Add to Cart</button>
+                    <button class="add-btn" onclick="addToCart(${item.id}, ${item.price}">Add to Cart</button>
                 </div>
                 `;
 
@@ -76,14 +76,23 @@
             console.log(itemPrice);
 
             
-            function calculateTotalPrice() {
-                sumOfPrice += itemPrice;
+            function calculateTotalPrice(array) {
+                // sumOfPrice += itemPrice;
+                // totalPriceSection.innerHTML = `
+                // <p>$${sumOfPrice}</p>
+                // `;
+                sumOfPrice = 0;
+                for (let i = 0; i < array.length; i++) {
+                    sumOfPrice += array[i].price * array[i].quantity;
+                }
                 totalPriceSection.innerHTML = `
                 <p>$${sumOfPrice}</p>
                 `;
             }
             
             listOfItemsInCart.innerHTML = '';
+
+
 
             switch (itemId) {
                 case 1:
@@ -94,7 +103,7 @@
                         quantity: 1,
                         id: itemId
                     });
-                    calculateTotalPrice();
+                    calculateTotalPrice(itemsInCart);
                     break;
                 case 2:
                     itemsInCart.push({
@@ -104,7 +113,7 @@
                         quantity: 1,
                         id: itemId
                     });
-                    calculateTotalPrice();
+                    calculateTotalPrice(itemsInCart);
                     break;
                 case 3:
                     itemsInCart.push({
@@ -114,7 +123,7 @@
                         quantity: 1,
                         id: itemId
                     });
-                    calculateTotalPrice();
+                    calculateTotalPrice(itemsInCart);
                     break;
                 case 4:
                     itemsInCart.push({
@@ -124,7 +133,7 @@
                         quantity: 1,
                         id: itemId
                     });
-                    calculateTotalPrice();
+                    calculateTotalPrice(itemsInCart);
                     break;
                 case 5:
                     itemsInCart.push({
@@ -134,7 +143,7 @@
                         quantity: 1,
                         id: itemId
                     });
-                    calculateTotalPrice();
+                    calculateTotalPrice(itemsInCart);
                     break;
                 case 6:
                     itemsInCart.push({
@@ -144,43 +153,95 @@
                         quantity: 1,
                         id: itemId
                     });
-                    calculateTotalPrice();
+                    calculateTotalPrice(itemsInCart);
                     break;
                 default:
                     break;
             }
 
 
-            for (let i = 0; i < itemsInCart.length; i++) {
+            // for (let i = 0; i < itemsInCart.length; i++) {
+            //     listOfItemsInCart.innerHTML += `
+            //     <li class="added-item">
+            //         <img src="${itemsInCart[i].image}" alt="item image">
+            //         <div>
+            //             <h4>${itemsInCart[i].name}</h4>
+            //             <p>$${itemsInCart[i].price}</p>
+            //             <div class="btn-container">
+            //                 <button class="minus-btn" data-id=${itemsInCart[i].id} onclick="reduceQuantity(${itemsInCart[i].quantity
+            //                 }, ${i})">-</button>
+            //                 <span class="countOfItem">${itemsInCart[i].quantity}</span>
+            //                 <button class="plus-btn" data-id=${itemsInCart[i].id} onclick="increaseQuantity()">+</button>
+            //             </div>
+            //         </div>
+            //     </li>
+            //     `;
+            // }
+
+            updateHTML(itemsInCart);
+        }
+
+        function updateHTML(array) {
+            for (let i = 0; i < array.length; i++) {
                 listOfItemsInCart.innerHTML += `
                 <li class="added-item">
-                    <img src="${itemsInCart[i].image}" alt="item image">
+                    <img src="${array[i].image}" alt="item image">
                     <div>
-                        <h4>${itemsInCart[i].name}</h4>
-                        <p>$${itemsInCart[i].price}</p>
+                        <h4>${array[i].name}</h4>
+                        <p>$${array[i].price * array[i].quantity}</p>
                         <div class="btn-container">
-                            <button class="minus-btn" data-id=${itemsInCart[i].id} onclick="reduceQuantity(${itemsInCart[i].quantity
+                            <button class="minus-btn" data-id=${array[i].id} onclick="reduceQuantity(${array[i].quantity
                             }, ${i})">-</button>
-                            <span class="countOfItem">${itemsInCart[i].quantity}</span>
-                            <button class="plus-btn" data-id=${itemsInCart[i].id} onclick="increaseQuantity()">+</button>
+                            <span class="countOfItem">${array[i].quantity}</span>
+                            <button class="plus-btn" data-id=${array[i].id} onclick="increaseQuantity(${array[i].quantity
+                            }, ${i})">+</button>
                         </div>
                     </div>
                 </li>
                 `;
             }
+        };
+        function clearHTML() {
+            listOfItemsInCart.innerHTML = '';
+        };
 
+
+        
+        function calculateTotalPrice2(array) {
+            sumOfPrice = 0;
+            for (let i = 0; i < array.length; i++) {
+                sumOfPrice += array[i].price * array[i].quantity;
+            }
+            totalPriceSection.innerHTML = `
+            <p>$${sumOfPrice}</p>
+        `;
+            console.log(itemsInCart);
         }
 
         function reduceQuantity(quantity, n) {
-            console.log("REDUCING THE QUANTITY");
+            clearHTML();
             quantity--;
-            sumOfPrice -= itemsInCart[n].price;
-            console.log(itemsInCart[n].name);
-            document.getElementsByClassName('countOfItem').innerHTML = `${quantity}`;
+            itemsInCart[n].quantity = quantity;
+            if (quantity === 0) {
+                itemsInCart.splice(n, 1);
+            }
+            calculateTotalPrice2(itemsInCart);
+            totalPriceSection.innerHTML = `
+                    <p>$${sumOfPrice}</p>
+                `;
+            updateHTML(itemsInCart);
         }
         
-        function increaseQuantity() {
+        function increaseQuantity(quantity, n) {
+            clearHTML();
+            quantity++;
+            itemsInCart[n].quantity = quantity;
             console.log("INCREASING THE QUANTITY");
+            calculateTotalPrice2(itemsInCart);
+            // totalPriceSection.innerHTML = `
+            //         <p>$${sumOfPrice}</p>
+            //     `;
+            updateHTML(itemsInCart);
         }
 
         let clearAllButton = document.getElementById('clear-all-btn');
