@@ -35,7 +35,7 @@
                 // // creating item card(s)
                 listOfItems.innerHTML += `
                 <div class="item-card">
-                    <img class="item-img" src="${item.image}" alt="${item.name}">
+                    <img class="item-img" src="${item.image}" alt="${item.name}" crossorigin="anonymous">
                     <h6 class="item-name">${item.name}</h6>
                     <p class="item-price">$${item.price}</p>
                     <button class="add-btn" onclick="addToCart(${item.id}, ${item.price}">Add to Cart</button>
@@ -185,7 +185,7 @@
             for (let i = 0; i < array.length; i++) {
                 listOfItemsInCart.innerHTML += `
                 <li class="added-item">
-                    <img src="${array[i].image}" alt="item image">
+                    <img src="${array[i].image}" alt="item image" crossorigin="anonymous">
                     <div>
                         <h4>${array[i].name}</h4>
                         <p>$${array[i].price * array[i].quantity}</p>
