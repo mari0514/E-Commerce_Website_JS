@@ -1,5 +1,5 @@
-    // const API_URL = "http://jsonblob.com/api/1074246173820469248";
-    const API_URL = "http://jsonblob.com/api/1074251048969060352";
+    // const API_URL = "http://jsonblob.com/api/1074287914812456960";
+    const API_URL = "http://jsonblob.com/api/1074288150784000000";
 
 
     let itemCountsSection = document.getElementById("item-counts");
@@ -10,6 +10,9 @@
     const listOfItemsInCart = document.getElementById("added-items");
     // const totalPrice = document.querySelector('#total-price');
     const totalPriceSection = document.getElementById('total-price');
+
+
+    let itemsInCart = [];
 
 
     fetch(API_URL)
@@ -40,6 +43,7 @@
                 `;
 
                 
+                displayEmptyCart();
 
 
                 let shoppingCartButton = document.getElementById("shopping-cart");
@@ -71,141 +75,127 @@
             console.log(itemId);
             console.log(itemPrice);
 
-
+            
+            function calculateTotalPrice() {
+                sumOfPrice += itemPrice;
+                totalPriceSection.innerHTML = `
+                <p>$${sumOfPrice}</p>
+                `;
+            }
+            
+            listOfItemsInCart.innerHTML = '';
 
             switch (itemId) {
                 case 1:
-                    listOfItemsInCart.innerHTML +=`
-                        <li class="added-item">
-                            <img src="https://images.pexels.com/photos/4809141/pexels-photo-4809141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="item image">
-                            <div>
-                                <h4>Chocolate Fruit Cake</h4>
-                                <p>$${itemPrice}</p>
-                                <div class="btn-container">
-                                    <button class="minus-btn" data-id=${itemId}>-</button>
-                                    <span class="countOfItem">${itemQuantity}</span>
-                                    <button class="plus-btn" data-id=${itemId}>+</button>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                    sumOfPrice += itemPrice;
-                    totalPriceSection.innerHTML = `
-                        <p>$${sumOfPrice}</p>
-                    `;
+                    itemsInCart.push({
+                        image: "https://images.pexels.com/photos/4809141/pexels-photo-4809141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                        name: "Chocolate Fruit Cake",
+                        price: itemPrice,
+                        quantity: 1,
+                        id: itemId
+                    });
+                    calculateTotalPrice();
                     break;
                 case 2:
-                    listOfItemsInCart.innerHTML +=`
-                        <li class="added-item">
-                            <img src="https://images.pexels.com/photos/4858510/pexels-photo-4858510.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
-                            <div>
-                                <h4>Cream Puff</h4>
-                                <p>$${itemPrice}</p>
-                                <div class="btn-container">
-                                    <button class="minus-btn" data-id=${itemId}>-</button>
-                                    <span class="countOfItem">${itemQuantity}</span>
-                                    <button class="plus-btn" data-id=${itemId}>+</button>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                    sumOfPrice += itemPrice;
-                    totalPriceSection.innerHTML = `
-                        <p>$${sumOfPrice}</p>
-                    `;
+                    itemsInCart.push({
+                        image: "https://images.pexels.com/photos/4858510/pexels-photo-4858510.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        name: "Cream Puff",
+                        price: itemPrice,
+                        quantity: 1,
+                        id: itemId
+                    });
+                    calculateTotalPrice();
                     break;
                 case 3:
-                    listOfItemsInCart.innerHTML +=`
-                        <li class="added-item">
-                            <img src="https://images.pexels.com/photos/6487798/pexels-photo-6487798.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
-                            <div>
-                                <h4>Chocolate Box</h4>
-                                <p>$${itemPrice}</p>
-                                <div class="btn-container">
-                                    <button class="minus-btn" data-id=${itemId}>-</button>
-                                    <span class="countOfItem">${itemQuantity}</span>
-                                    <button class="plus-btn" data-id=${itemId}>+</button>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                    sumOfPrice += itemPrice;
-                    totalPriceSection.innerHTML = `
-                        <p>$${sumOfPrice}</p>
-                    `;
+                    itemsInCart.push({
+                        image: "https://images.pexels.com/photos/6487798/pexels-photo-6487798.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        name: "Chocolate Box",
+                        price: itemPrice,
+                        quantity: 1,
+                        id: itemId
+                    });
+                    calculateTotalPrice();
                     break;
                 case 4:
-                    listOfItemsInCart.innerHTML +=`
-                        <li class="added-item">
-                            <img src="https://images.pexels.com/photos/9810298/pexels-photo-9810298.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
-                            <div>
-                                <h4>Chocolate & Nuts Pound Cake</h4>
-                                <p>$${itemPrice}</p>
-                                <div class="btn-container">
-                                    <button class="minus-btn" data-id=${itemId}>-</button>
-                                    <span class="countOfItem">${itemQuantity}</span>
-                                    <button class="plus-btn" data-id=${itemId}>+</button>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                    sumOfPrice += itemPrice;
-                    totalPriceSection.innerHTML = `
-                        <p>$${sumOfPrice}</p>
-                    `;
+                    itemsInCart.push({
+                        image: "https://images.pexels.com/photos/9810298/pexels-photo-9810298.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        name: "Chocolate & Nuts Pound Cake",
+                        price: itemPrice,
+                        quantity: 1,
+                        id: itemId
+                    });
+                    calculateTotalPrice();
                     break;
                 case 5:
-                    listOfItemsInCart.innerHTML +=`
-                        <li class="added-item">
-                            <img src="https://images.pexels.com/photos/9984796/pexels-photo-9984796.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
-                            <div>
-                                <h4>Mariposa Green Cake</h4>
-                                <p>$${itemPrice}</p>
-                                <div class="btn-container">
-                                    <button class="minus-btn" data-id=${itemId}>-</button>
-                                    <span class="countOfItem">${itemQuantity}</span>
-                                    <button class="plus-btn" data-id=${itemId}>+</button>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                    sumOfPrice += itemPrice;
-                    totalPriceSection.innerHTML = `
-                        <p>$${sumOfPrice}</p>
-                    `;
+                    itemsInCart.push({
+                        image: "https://images.pexels.com/photos/9984796/pexels-photo-9984796.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        name: "Mariposa Green Cake",
+                        price: itemPrice,
+                        quantity: 1,
+                        id: itemId
+                    });
+                    calculateTotalPrice();
                     break;
                 case 6:
-                    listOfItemsInCart.innerHTML +=`
-                        <li class="added-item">
-                            <img src="https://images.pexels.com/photos/8963942/pexels-photo-8963942.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
-                            <div>
-                                <h4>Pistachio Macaron</h4>
-                                <p>$${itemPrice}</p>
-                                <div class="btn-container">
-                                    <button class="minus-btn" data-id=${itemId}>-</button>
-                                    <span class="countOfItem">${itemQuantity}</span>
-                                    <button class="plus-btn" data-id=${itemId}>+</button>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                    sumOfPrice += itemPrice;
-                    totalPriceSection.innerHTML = `
-                        <p>$${sumOfPrice}</p>
-                    `;
+                    itemsInCart.push({
+                        image: "https://images.pexels.com/photos/8963942/pexels-photo-8963942.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                        name: "Pistachio Macaron",
+                        price: itemPrice,
+                        quantity: 1,
+                        id: itemId
+                    });
+                    calculateTotalPrice();
                     break;
                 default:
                     break;
             }
 
+
+            for (let i = 0; i < itemsInCart.length; i++) {
+                listOfItemsInCart.innerHTML += `
+                <li class="added-item">
+                    <img src="${itemsInCart[i].image}" alt="item image">
+                    <div>
+                        <h4>${itemsInCart[i].name}</h4>
+                        <p>$${itemsInCart[i].price}</p>
+                        <div class="btn-container">
+                            <button class="minus-btn" data-id=${itemsInCart[i].id} onclick="reduceQuantity(${itemsInCart[i].quantity
+                            }, ${i})">-</button>
+                            <span class="countOfItem">${itemsInCart[i].quantity}</span>
+                            <button class="plus-btn" data-id=${itemsInCart[i].id} onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                </li>
+                `;
+            }
+
+        }
+
+        function reduceQuantity(quantity, n) {
+            console.log("REDUCING THE QUANTITY");
+            quantity--;
+            sumOfPrice -= itemsInCart[n].price;
+            console.log(itemsInCart[n].name);
+            document.getElementsByClassName('countOfItem').innerHTML = `${quantity}`;
+        }
+        
+        function increaseQuantity() {
+            console.log("INCREASING THE QUANTITY");
         }
 
         let clearAllButton = document.getElementById('clear-all-btn');
         clearAllButton.addEventListener('click', () => {
-            listOfItemsInCart.innerHTML = '';
-            totalPriceSection.innerHTML = '';
-            itemCounts = 0;
-            itemCountsSection.innerHTML = `${itemCounts}`;
+            itemsInCart.length = 0;
+            displayEmptyCart();
         })
 
-
+        
+        function displayEmptyCart () {
+            if (itemsInCart.length <= 0) {
+                listOfItemsInCart.innerHTML = 'Oops, your Cart is empty!';
+                itemCounts = 0;
+                itemCountsSection.innerHTML = `${itemCounts}`;
+                sumOfPrice = 0;
+                totalPriceSection.innerHTML = `$${sumOfPrice}`;
+            }
+        }
