@@ -187,7 +187,7 @@ main {
 #hero {
   padding: 0 100px;
   background-image: url(assets/hero-image.png);
-  height: 90vh;
+  height: 91vh;
   width: 100%;
   background-size: cover;
   background-position: top 25% right 30%;
@@ -334,34 +334,23 @@ main {
   font-size: 20px;
 }
 
-html #cart {
+#cart {
   display: none;
   position: fixed;
-  top: 24vh;
-  right: calc(50% - 150px);
-  max-width: 300px;
-  padding: 32px;
-  background-color: #222;
+  top: 0;
+  right: 0;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 30vw;
+  min-width: 400px;
+  z-index: 2;
+  padding: 124px 16px;
+  background-color: rgba(34, 34, 34, 0.96);
   color: #fff;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
-html #cart #close-btn {
-  margin-bottom: 16px;
-}
-
-html #cart #close-btn:hover {
-  cursor: pointer;
-  color: #657559;
-}
-
-html #cart .added-item-description {
+#cart .cart-contents {
+  padding-top: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -374,17 +363,108 @@ html #cart .added-item-description {
           align-items: center;
 }
 
-html #cart .added-item h4 {
+#cart .cart-contents #close-btn {
+  display: inline-block;
+  position: fixed;
+  right: 32px;
+  margin-bottom: 16px;
+}
+
+#cart .cart-contents #close-btn:hover {
+  cursor: pointer;
+  color: #657559;
+}
+
+#cart .cart-contents #cart-title {
+  color: #657559;
+  margin-bottom: 40px;
+  font-size: 28px;
+}
+
+#cart .cart-contents #total-price-section {
+  text-align: center;
+  margin-top: 32px;
+}
+
+#cart .cart-contents #total-price-section h4 {
+  color: #657559;
+}
+
+#cart .cart-contents #total-price-section p {
+  margin-top: 24px;
+  color: #fff;
+  font-size: 28px;
+}
+
+#cart .cart-contents .btns-in-cart {
+  margin-top: 24px;
+}
+
+#cart .cart-contents .btns-in-cart button {
+  padding: 12px 16px;
+  margin-bottom: 48px;
   color: #fff;
 }
 
-html #cart img {
-  width: 92px;
-  height: 92px;
+#cart .cart-contents .btns-in-cart button + button {
+  margin-left: 32px;
 }
 
-html #cart .minus-btn, html #cart .plus-btn {
-  padding: 8px 16px;
+#cart .cart-contents .btns-in-cart #clear-all-btn {
+  background: #ff4343;
+}
+
+#cart .cart-contents .btns-in-cart #checkout-btn {
+  background: #4385ff;
+}
+
+#cart .cart-contents #added-items {
+  text-align: center;
+  padding: 0 12px;
+}
+
+#cart .cart-contents #added-items .added-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 12px;
+}
+
+#cart .cart-contents #added-items .added-item-description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#cart .cart-contents #added-items .added-item h4 {
+  color: #fff;
+}
+
+#cart .cart-contents #added-items img {
+  width: 92px;
+  height: 92px;
+  margin-right: 32px;
+}
+
+#cart .cart-contents #added-items .btn-container .minus-btn, #cart .cart-contents #added-items .btn-container .plus-btn {
+  padding: 4px 16px;
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+#cart .cart-contents #added-items .btn-container span {
+  font-size: 20px;
+  margin: 0 12px;
 }
 
 #location {
@@ -395,6 +475,10 @@ html #cart .minus-btn, html #cart .plus-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -402,6 +486,24 @@ html #cart .minus-btn, html #cart .plus-btn {
 
 #location .map h4 {
   padding-bottom: 48px;
+}
+
+#location .get-in-touch {
+  margin-top: 36px;
+}
+
+#location .get-in-touch i {
+  padding-right: 24px;
+}
+
+#location .get-in-touch .address, #location .get-in-touch .email-address {
+  margin-top: 16px;
+  font-size: 20px;
+}
+
+#location .get-in-touch .address:hover, #location .get-in-touch .email-address:hover {
+  cursor: pointer;
+  color: #657559;
 }
 
 #newsletter {

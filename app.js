@@ -1,141 +1,46 @@
-window.addEventListener("load", () => {
-    // const API_URL = "http://jsonblob.com/api/1072766826269917184";
-    const API_URL = "http://jsonblob.com/api/1073046958612168704";
+    // const API_URL = "http://jsonblob.com/api/1074246173820469248";
+    const API_URL = "http://jsonblob.com/api/1074251048969060352";
+
+
+    let itemCountsSection = document.getElementById("item-counts");
+    let itemCounts = itemCountsSection.textContent;
+
+
+    const listOfItems = document.getElementById("item-contents");
+    const listOfItemsInCart = document.getElementById("added-items");
+    // const totalPrice = document.querySelector('#total-price');
+    const totalPriceSection = document.getElementById('total-price');
+
 
     fetch(API_URL)
         .then(res => {
+            if (!res.ok) {
+                return Promise.reject('some reason');
+            }
             return res.json();
         })
         .then(data => {
-            // console.log(data.length);
+            console.log(data);
+            console.log(typeof(data));
+
+
             data.forEach(item => {
+                // console.log(item);
                 // console.log(item.name);
                 // console.log(item.id);
-                // console.log(`Price: $${item.price}`);
 
-                const itemContents = document.getElementById("item-contents");
+                // // creating item card(s)
+                listOfItems.innerHTML += `
+                <div class="item-card">
+                    <img class="item-img" src="${item.image}" alt="${item.name}">
+                    <h6 class="item-name">${item.name}</h6>
+                    <p class="item-price">$${item.price}</p>
+                    <button class="add-btn" onclick="addToCart(${item.id}, ${item.price})">Add to Cart</button>
+                </div>
+                `;
 
-                let itemCard = document.createElement('div');
-                itemCard.classList.add("item-card");
-                itemContents.appendChild(itemCard);
-
-                let itemImage = document.createElement('img');
-                itemImage.classList.add("item-img");
-                itemImage.src = item.image;
-                itemImage.alt = "Item Image";
-
-                let itemName = document.createElement('h6');
-                itemName.classList.add("item-name");
-                itemName.textContent = item.name;
-
-                let itemPrice = document.createElement('p');
-                itemPrice.classList.add("item-price");
-                itemPrice.textContent = `$${item.price}`;
-
-                let addToCartBtn = document.createElement('button');
-                // let addToCartBtn = document.createElement('div');
-                addToCartBtn.classList.add("add-btn");
-                addToCartBtn.textContent= "Add to cart";
-                // addToCartBtn.innerHTML = '<i class="fa-solid fa-cart-plus fa-xl"></i>&nbsp<i class="fa-solid fa-greater-than fa-xl"></i>';
-
-                itemCard.appendChild(itemImage);
-                itemCard.appendChild(itemName);
-                itemCard.appendChild(itemPrice);
-                itemCard.appendChild(addToCartBtn);
-
-
-
-
-                addToCartBtn.addEventListener("click", (event) => {
-                    // kokokara
-                    let itemsInCart = [];
-
-                    const addedItemsList = document.getElementById("added-items");
-
-                    const cartSum = document.getElementById("price-sum");
-                    const items = document.querySelectorAll(".item-card");
-
-                    const countTheSum = function() {
-                        let sumPrice = 0;
-                        itemsInCart.forEach(item => {
-                            sumPrice += item.price;
-                        });
-                        return sumPrice;
-                    }
-
-                    const updateShoppingCartHTML = function() {
-                        if (itemsInCart.length > 0) {
-                            let result = itemsInCart.map(item => {
-                                return `
-                                <li class="added-item">
-                                <img src="${item.image}">
-                                <div class="added-itetm-description">
-                                    <h4>${item.name}</h4>
-                                    <p>$${item.price} * ${item.count}</p>
-                                    <div>
-                                        <button class="minus-btn" data-id="${item.id}">-</button>
-                                        <button class="plus-btn" data-id="${item.id}">+</button>
-                                    </div>
-                                </div>
-                                </li>
-                                `;
-                            });
-                            addedItemsList.innerHTML = result.join('');
-                            // document.getElementById('cart').classList.remove('hidden');
-                            cartSum.innerHTML = "$" + countTheSum();
-                        } else {
-                            // document.getElementById('cart').classList.add('hidden');
-                            let emptyMessage = "<p>Your shopping cart is empty.</p>";
-                            addedItemsList.innerHTML = emptyMessage.join('');
-                            document.getElementById('item-counts').innerHTML = "0";
-                            cartSum.innerHTML = "$0";
-                        }
-                    }
-
-                    function updateItemsInCart(item) {
-                        for (let i = 0; i < itemsInCart.length; i++) {
-                            if (itemsInCart[i].id == item.id) {
-                                itemsInCart[i].count += 1;
-                                itemsInCart[i].price = itemsInCart[i].basePrice * itemsInCart[i].count;
-                                return;
-                            }
-                        }
-                        itemsInCart.push(item);
-                    }
-                    // kokomade
-
-
-                    if (event. target.classList.contains('add-btn')) {
-                        // const itemID = event.target.dataset.itemID;
-                        // // const itemName = item.querySelector(".item-name").innerHTML;
-                        // const itemName = document.getElementsByClassName("item-name");
-                        // // const itemPrice = item.querySelector(".item-price").innerHTML;
-                        // const itemPrice = document.querySelector(".item-price").innerHTML;
-                        // // const itemImage = item.querySelector(".item-img").src;
-                        // const itemImage = document.querySelector(".item-img").src;
-            
-                        let itemToCart = {
-                            name: item.name,
-                            image: item.image,
-                            id: item.id,
-                            count: 1,
-                            price: +item.price,
-                            basePrice: +item.price
-                        };
-            
-                        updateItemsInCart(itemToCart);
-                        updateShoppingCartHTML();
-                    }
-
-
-                    document.getElementById("item-counts").innerHTML = "1";
-
-
-                    console.log(item.name);
-                    console.log(itemsInCart);
-                    console.log(countTheSum());
-                });
                 
+
 
                 let shoppingCartButton = document.getElementById("shopping-cart");
                 shoppingCartButton.addEventListener("click", () => {
@@ -147,10 +52,160 @@ window.addEventListener("load", () => {
                     document.getElementById("cart").style.display = "none";
                 });
             });
+
         })
         .catch(error => {
             console.log(error);
         })
 
+        let sumOfPrice = 0;
 
-})
+        let itemQuantity = 1;
+  
+
+        function addToCart(itemId, itemPrice){
+            itemCounts++;
+            itemCountsSection.innerHTML = `${itemCounts}`;
+
+
+            console.log(itemId);
+            console.log(itemPrice);
+
+
+
+            switch (itemId) {
+                case 1:
+                    listOfItemsInCart.innerHTML +=`
+                        <li class="added-item">
+                            <img src="https://images.pexels.com/photos/4809141/pexels-photo-4809141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="item image">
+                            <div>
+                                <h4>Chocolate Fruit Cake</h4>
+                                <p>$${itemPrice}</p>
+                                <div class="btn-container">
+                                    <button class="minus-btn" data-id=${itemId}>-</button>
+                                    <span class="countOfItem">${itemQuantity}</span>
+                                    <button class="plus-btn" data-id=${itemId}>+</button>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    sumOfPrice += itemPrice;
+                    totalPriceSection.innerHTML = `
+                        <p>$${sumOfPrice}</p>
+                    `;
+                    break;
+                case 2:
+                    listOfItemsInCart.innerHTML +=`
+                        <li class="added-item">
+                            <img src="https://images.pexels.com/photos/4858510/pexels-photo-4858510.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
+                            <div>
+                                <h4>Cream Puff</h4>
+                                <p>$${itemPrice}</p>
+                                <div class="btn-container">
+                                    <button class="minus-btn" data-id=${itemId}>-</button>
+                                    <span class="countOfItem">${itemQuantity}</span>
+                                    <button class="plus-btn" data-id=${itemId}>+</button>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    sumOfPrice += itemPrice;
+                    totalPriceSection.innerHTML = `
+                        <p>$${sumOfPrice}</p>
+                    `;
+                    break;
+                case 3:
+                    listOfItemsInCart.innerHTML +=`
+                        <li class="added-item">
+                            <img src="https://images.pexels.com/photos/6487798/pexels-photo-6487798.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
+                            <div>
+                                <h4>Chocolate Box</h4>
+                                <p>$${itemPrice}</p>
+                                <div class="btn-container">
+                                    <button class="minus-btn" data-id=${itemId}>-</button>
+                                    <span class="countOfItem">${itemQuantity}</span>
+                                    <button class="plus-btn" data-id=${itemId}>+</button>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    sumOfPrice += itemPrice;
+                    totalPriceSection.innerHTML = `
+                        <p>$${sumOfPrice}</p>
+                    `;
+                    break;
+                case 4:
+                    listOfItemsInCart.innerHTML +=`
+                        <li class="added-item">
+                            <img src="https://images.pexels.com/photos/9810298/pexels-photo-9810298.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
+                            <div>
+                                <h4>Chocolate & Nuts Pound Cake</h4>
+                                <p>$${itemPrice}</p>
+                                <div class="btn-container">
+                                    <button class="minus-btn" data-id=${itemId}>-</button>
+                                    <span class="countOfItem">${itemQuantity}</span>
+                                    <button class="plus-btn" data-id=${itemId}>+</button>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    sumOfPrice += itemPrice;
+                    totalPriceSection.innerHTML = `
+                        <p>$${sumOfPrice}</p>
+                    `;
+                    break;
+                case 5:
+                    listOfItemsInCart.innerHTML +=`
+                        <li class="added-item">
+                            <img src="https://images.pexels.com/photos/9984796/pexels-photo-9984796.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
+                            <div>
+                                <h4>Mariposa Green Cake</h4>
+                                <p>$${itemPrice}</p>
+                                <div class="btn-container">
+                                    <button class="minus-btn" data-id=${itemId}>-</button>
+                                    <span class="countOfItem">${itemQuantity}</span>
+                                    <button class="plus-btn" data-id=${itemId}>+</button>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    sumOfPrice += itemPrice;
+                    totalPriceSection.innerHTML = `
+                        <p>$${sumOfPrice}</p>
+                    `;
+                    break;
+                case 6:
+                    listOfItemsInCart.innerHTML +=`
+                        <li class="added-item">
+                            <img src="https://images.pexels.com/photos/8963942/pexels-photo-8963942.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="item image">
+                            <div>
+                                <h4>Pistachio Macaron</h4>
+                                <p>$${itemPrice}</p>
+                                <div class="btn-container">
+                                    <button class="minus-btn" data-id=${itemId}>-</button>
+                                    <span class="countOfItem">${itemQuantity}</span>
+                                    <button class="plus-btn" data-id=${itemId}>+</button>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                    sumOfPrice += itemPrice;
+                    totalPriceSection.innerHTML = `
+                        <p>$${sumOfPrice}</p>
+                    `;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        let clearAllButton = document.getElementById('clear-all-btn');
+        clearAllButton.addEventListener('click', () => {
+            listOfItemsInCart.innerHTML = '';
+            totalPriceSection.innerHTML = '';
+            itemCounts = 0;
+            itemCountsSection.innerHTML = `${itemCounts}`;
+        })
+
+

@@ -16,6 +16,7 @@
     />
     <!-- google fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo Black">
     <title>La Maison Des Bonbons</title>
 </head>
 <body>
@@ -66,34 +67,50 @@
         <!-- item section -->
         <section id="item">
             <h4>ITEMS</h4>
-
-
             <div id="item-contents">
             </div>
 
         </section>
 
         <!-- cart section -->
-        <section id="cart">
-            <div id="close-btn">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-            <ul id="added-items">
-                <!-- <h4>EMPTY!</h4>
-                <li class="added-item">
-                    <img src="" alt="item image">
-                    <div>
-                        <h4>Item Name</h4>
-                        <p>Item Price</p>
+        <section id="cart" class="scroller">
+            <div class="cart-contents">
+                <h3 id="cart-title">Your Cart</h3>
+                <div id="close-btn">
+                    <i class="fa-solid fa-xmark fa-xl"></i>
+                </div>
+
+                
+
+                <ul id="added-items">
+                    <!-- <li class="added-item">
+                        <img src="assets/item-one.png" alt="item image">
                         <div>
-                            <button class="minus-btn" data-id="1">-</button>
-                            <button class="plus-btn" data-id="1">+</button>
+                            <h4>Item Name</h4>
+                            <p>Item Price</p>
+                            <div class="btn-container">
+                                <button class="minus-btn" data-id="1">-</button>
+                                <span class="countOfItem">1</span>
+                                <button class="plus-btn" data-id="1">+</button>
+                            </div>
                         </div>
-                    </div>
-                </li> -->
-            </ul>
-            <h6>TOTAL PRICE:</h6>
-            <p id="price-sum" style="color: green;"></p>
+                    </li> -->
+                </ul>
+
+
+
+                <div id="total-price-section">
+                    <h4>Total Price</h4>
+                    <p id="total-price"></p>
+                </div>
+
+                <div class="btns-in-cart">
+                    <button id="clear-all-btn">Clear All</button>
+                    <button id="checkout-btn">Checkout</button>
+                </div>
+
+
+            </div>
         </section>
 
         <!-- location section -->
@@ -101,6 +118,10 @@
             <div class="map">
                 <h4>LOCATION</h4>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.7603351587973!2d-123.12205668413218!3d49.28093837881499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5486717fb38c9995%3A0x5b98784cb7e82cca!2s816%20Granville%20St%2C%20Vancouver%2C%20BC%20V6Z%201K3!5e0!3m2!1sen!2sca!4v1675664750333!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="get-in-touch">
+                <div class="address"><i class="fa-regular fa-map"></i>816 Granville St., Vancouver, BC</div>
+                <div class="email-address"><i class="fa-regular fa-envelope"></i>lamaisondesbonbons@example.com</div>
             </div>
         </section>
 
@@ -134,7 +155,7 @@
         </div>
         <small>&copy; 2023 La Maison Des Bonbons</small>
     </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.2/axios.min.js" integrity="sha512-NCiXRSV460cHD9ClGDrTbTaw0muWUBf/zB/yLzJavRsPNUl9ODkUVmUHsZtKu17XknhsGlmyVoJxLg/ZQQEeGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="app.js"></script>
     <!-- <script src="/JS/shoppingCart.js"></script> -->
 </body>
