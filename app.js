@@ -1,4 +1,3 @@
-    // const API_URL = "http://jsonblob.com/api/1074287914812456960";
     const API_URL = "http://jsonblob.com/api/1074288150784000000";
 
 
@@ -16,6 +15,7 @@
 
 
     fetch(API_URL)
+    // fetch('item.json')
         .then(res => {
             if (!res.ok) {
                 return Promise.reject('some reason');
