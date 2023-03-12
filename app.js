@@ -14,8 +14,8 @@
     let itemsInCart = [];
 
 
-    fetch(API_URL)
-    // fetch('item.json')
+    // fetch(API_URL)
+    fetch('item.json')
         .then(res => {
             if (!res.ok) {
                 return Promise.reject('some reason');
